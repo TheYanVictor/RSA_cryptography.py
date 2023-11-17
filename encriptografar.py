@@ -1,83 +1,72 @@
-# Encriptografar
+#encriptografar
 
 import math
 import random
 import numpy as np
 
 
-print ('Encriptografar\n ')
-print ('\n Insira p:')
-p = int(input())
-print ('\n Insira q:')
-q = int(input())
-print ('\n Insira chave pública:')
-k = int(input())
+def input_dados():
+    print('\n Insira p:')
+    p = int(input())
+    print('\n Insira q:')
+    q = int(input())
+    print('\n Insira mensagem:')
+    mensagem = input()
+    return p, q, mensagem
 
-# Calcula n
-n = p * q
-print ('\n n = p * q =', n)
+# Verifica se p e q são primos
+def verifica_primos(p, q):
+    """
+    Check if p and q are prime numbers.
+    """
+    return math.gcd(p, q) == 1
 
-# Calcula phi de n (totiente de n)
-phi = (p - 1) * (q - 1)
-print ('\n phi = (p - 1) * (q - 1) =', phi)
+# Calcula n 
+def calcula_n(p, q):
+    return p * q
+
+# Calcula phi de n (totiente de n) => Z = phi
+# Quantos numeros são primos relativos a n
+def calcula_phi(p, q):
+    return (p - 1) * (q - 1)
+
+# Acha valores de D
+def acha_valores_d(phi):
+    d = 0
+    valores_d = []
+    while d < phi:
+        test = math.gcd(d, phi) == 1
+        if test:
+            valores_d.append(d)
+        d += 1
+    return random.choice(valores_d)
+
+
+def calcula_e(phi, d):
+    e = 0
+    valores_e = []
+    while e < phi:
+        test = (e * d) % phi == 1
+        if test:
+            valores_e.append(e)
+        e += 1
+    return random.choice(valores_e)
+
+
+def cria_chaves(p, q):
+    n = calcula_n(p, q)
+    phi = calcula_phi(p, q)
+    d = acha_valores_d(phi)
+    e = calcula_e(phi, d)
+    return n, d, e
+
+
+def encriptografar(mensagem, e, n):
+    mensagem_encriptografada = []
+    for letra in mensagem:
+        mensagem_encriptografada.append((ord(letra)** e) % n)
+    return mensagem_encriptografada
 
 
 
-# Acha todos os valores de D
-i = 2
-valores_d = []
-while (i < phi):
-    if math.gcd(i, phi) == 1:
-        # armazena todos os valores de i
-        valores_d.append(i)
-    i = i + 1
-
-# Determina um valor de d aleatório
-d = random.choice(valores_d)
-
-print ('\n d =', d)
-
-# Calcula e
-#(E * D) mod Z = 1 (Z = phi)
-e = 0
-valores_e = []
-while (e < phi):
-    if ((e * d) % phi == 1):
-        valores_e.append(e)
-    e = e + 1
-# Determina um valor de e aleatório
-e = random.choice(valores_e)
     
-print ('\n e =', e)
-
-# Calcula a chave privada
-chave_privada = (n, d)
-print ('\n Chave privada:', chave_privada)
-
-# Calcula a chave pública
-chave_publica = (n, e)
-print ('\n Chave pública:', chave_publica)
-
-# Insere texto a ser encriptografado
-print ('\n Insira a mensagem:')
-mensagem = input()
-
-# Encriptografar pela tabela ASCII
-mensagem_encriptografada = []
-for letra in mensagem:
-    mensagem_encriptografada.append((ord(letra) ** e )% n)
-
-# Convertendo para string
-mensagem_criptografada = []
-for letra in mensagem_encriptografada:
-    mensagem_criptografada.append(chr(letra))
-    
-print ('\n Mensagem desencriptografada:', "".join(mensagem_criptografada))
-
-# Desencriptografar
-mensagem_desencriptografada = []
-for letra in mensagem_encriptografada:
-    mensagem_desencriptografada.append(chr((letra ** d) % n))
-print ('\n Mensagem desencriptografada:', "".join(mensagem_desencriptografada))
-
-
