@@ -10,7 +10,7 @@ def encriptografar(e, n):
     # Escrever a mensagem encriptografada em um arquivo
     arquivo = open('mensagem_encriptografada.txt', 'w')
     for item in mensagem_encriptografada:
-        arquivo.write("%s\n" % item)
+        arquivo.write("%s, " % item)
     arquivo.close()
     return mensagem_encriptografada
 
