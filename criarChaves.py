@@ -6,14 +6,37 @@ def input_dados():
     p = int(input())
     print('\n Insira q:')
     q = int(input())
-    print('\n Insira mensagem:')
-    mensagem = input()
-    return p, q, mensagem
+    if verifica_primos(p, q) == False:
+        print ('\n p e q precisam ser primos')
+        input_dados()
+    return p, q
 
-# Verifica se p e q são primos
+# Primes verification
 def verifica_primos(p, q):
-    
-    return math.gcd(p, q) == 1
+    """
+    Verifies if two numbers p and q are prime.
+
+    Parameters:
+    p (int): The first number to be checked.
+    q (int): The second number to be checked.
+
+    Returns:
+    bool: True if both p and q are prime, False otherwise.
+    """
+    # Initial values
+    flag_p = True
+    flag_q = True
+    if p > 1 and q > 1:
+        for i in range (2, p):
+            if p % i == 0:
+                flag_p = False
+        for i in range (2, q):
+            if q % i == 0:
+                flag_q = False
+    if flag_p == False or flag_q == False:
+        return False
+    else:
+        return True
 
 # Calcula n 
 def calcula_n(p, q):
