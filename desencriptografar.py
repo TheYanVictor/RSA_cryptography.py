@@ -2,7 +2,7 @@
 
 
 #desencriptografa a mensagem
-import numpy as np
+#import numpy as np
 
 
 def desencriptografar(mensagem_encriptografada, d, n):

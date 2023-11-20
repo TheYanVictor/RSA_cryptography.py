@@ -2,6 +2,7 @@
 
 import encriptografar as encript
 import desencriptografar as descript
+import criarChaves as create
 
 
 #main function
@@ -9,15 +10,15 @@ def main():
     
     
     #entrada de dados
-    p, q, mensagem = encript.input_dados()
+    p, q, mensagem = create.input_dados()
     
     #confere se p e q são primos
-    if (encript.verifica_primos(p, q) == False):
+    if (create.verifica_primos(p, q) == False):
         print ('\n p e q precisam ser primos')
-        p, q, k, mensagem = encript.input_dados()
+        p, q, k, mensagem = create.input_dados()
         
     # Cria as chaves
-    n, e, d = encript.cria_chaves(p, q)
+    n, e, d = create.cria_chaves(p, q)
     
     # mostra as chaves
     print ('\n Chave pública: ' + str(e) + ', ' + str(n))
