@@ -64,7 +64,7 @@ def cria_chaves(p, q):
     e = calcula_e(phi, d)
     
     # Armazena as chaves privadas em um arquivo
-    with open('chaves_priv.txt', 'w', encoding='utf-8') as arquivo:
+    with open('chaves_priv.txt', 'w', encoding='iso-8859-1' ) as arquivo:
         arquivo.write(str(d) + '\n' + str(n))
     # Armazena as chaves publicas em um arquivo
     with open('chaves_pub.txt', 'w', encoding='utf-8') as arquivo:
