@@ -11,18 +11,9 @@ def input_dados():
         input_dados()
     return p, q
 
-# Primes verification
+# Verifica se p e q são primos
 def verifica_primos(p, q):
-    """
-    Verifies if two numbers p and q are prime.
 
-    Parameters:
-    p (int): The first number to be checked.
-    q (int): The second number to be checked.
-
-    Returns:
-    bool: True if both p and q are prime, False otherwise.
-    """
     # Initial values
     flag_p = True
     flag_q = True
@@ -71,4 +62,11 @@ def cria_chaves(p, q):
     phi = calcula_phi(p, q)
     d = acha_valores_d(phi)
     e = calcula_e(phi, d)
+    
+    # Armazena as chaves privadas em um arquivo
+    with open('chaves_priv.txt', 'w', encoding='utf-8') as arquivo:
+        arquivo.write(str(d) + '\n' + str(n))
+    # Armazena as chaves publicas em um arquivo
+    with open('chaves_pub.txt', 'w', encoding='utf-8') as arquivo:
+        arquivo.write(str(e) + '\n' + str(n))
     return n, d, e
