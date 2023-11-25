@@ -21,9 +21,11 @@ def verifica_primos(p, q):
         for i in range (2, p):
             if p % i == 0:
                 flag_p = False
+                break
         for i in range (2, q):
             if q % i == 0:
                 flag_q = False
+                break
     if flag_p == False or flag_q == False:
         return False
     else:
@@ -40,13 +42,14 @@ def calcula_phi(p, q):
 
 # Acha valores de D
 def acha_valores_d(phi):
-    d = 0
+    d = 2
     valores_d = []
     while d < phi:
         test = math.gcd(d, phi) == 1
         if test:
             valores_d.append(d)
         d += 1
+    print('\n Valores de d: ', valores_d)
     return random.choice(valores_d)
 
 def calcula_e(phi, d):
