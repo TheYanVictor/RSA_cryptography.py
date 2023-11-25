@@ -1,9 +1,5 @@
 # desencriptografar
-
-
-
 import os
-
 
 def desencriptografar():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -17,9 +13,6 @@ def desencriptografar():
         d = int(lines[0])
         n = int(lines[1])
 
-    # Converte a mensagem encriptografada em uma lista de inteiros
-    
-    
     # Abrir e ler o arquivo com a mensagem encriptografada
     with open('mensagem_encriptografada.txt', 'r', encoding='utf-8') as arquivo:
         mensagem_encriptografada = [int(e) for e in arquivo.read().split('-') if e.isnumeric()]
